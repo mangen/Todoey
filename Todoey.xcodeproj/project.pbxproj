@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0430DD76221A2A7D000CA3D7 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0430DD75221A2A7D000CA3D7 /* CategoryViewController.swift */; };
-		04769D80221DF2FC00F0DE63 /* DayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04769D7F221DF2FC00F0DE63 /* DayViewController.swift */; };
 		04B90209220E0B6400EC5826 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B90208220E0B6400EC5826 /* AppDelegate.swift */; };
 		04B9020B220E0B6400EC5826 /* ToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B9020A220E0B6400EC5826 /* ToDoListViewController.swift */; };
 		04B9020E220E0B6400EC5826 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04B9020C220E0B6400EC5826 /* Main.storyboard */; };
@@ -22,7 +21,6 @@
 
 /* Begin PBXFileReference section */
 		0430DD75221A2A7D000CA3D7 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
-		04769D7F221DF2FC00F0DE63 /* DayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewController.swift; sourceTree = "<group>"; };
 		04B90205220E0B6400EC5826 /* Todoey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Todoey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04B90208220E0B6400EC5826 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04B9020A220E0B6400EC5826 /* ToDoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewController.swift; sourceTree = "<group>"; };
@@ -65,7 +63,6 @@
 				0430DD75221A2A7D000CA3D7 /* CategoryViewController.swift */,
 				04B9020A220E0B6400EC5826 /* ToDoListViewController.swift */,
 				04F92515221CC22900EFB549 /* SwipeTableViewController.swift */,
-				04769D7F221DF2FC00F0DE63 /* DayViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -213,9 +210,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Todoey/Pods-Todoey-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/CalendarKit/CalendarKit.framework",
-				"${BUILT_PRODUCTS_DIR}/DateToolsSwift/DateToolsSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/Neon/Neon.framework",
+				"${BUILT_PRODUCTS_DIR}/CVCalendar/CVCalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SwipeCellKit/SwipeCellKit.framework",
@@ -224,9 +219,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CalendarKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DateToolsSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Neon.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CVCalendar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeCellKit.framework",
@@ -270,7 +263,6 @@
 				04B9020B220E0B6400EC5826 /* ToDoListViewController.swift in Sources */,
 				04B90209220E0B6400EC5826 /* AppDelegate.swift in Sources */,
 				04F92516221CC22900EFB549 /* SwipeTableViewController.swift in Sources */,
-				04769D80221DF2FC00F0DE63 /* DayViewController.swift in Sources */,
 				04F92514221A55AE00EFB549 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -425,7 +417,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.gio.Todoey;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gioMan.Todoey;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -444,7 +436,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.gio.Todoey;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gioMan.Todoey;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

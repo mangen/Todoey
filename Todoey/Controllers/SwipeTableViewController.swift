@@ -8,7 +8,7 @@
 
 import UIKit
 import SwipeCellKit
-import CalendarKit
+import CVCalendar
 
 class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegate {
 

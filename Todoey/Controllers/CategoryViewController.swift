@@ -8,9 +8,24 @@
 
 import UIKit
 import RealmSwift
-import CalendarKit
+import CVCalendar
 
 class CategoryViewController: SwipeTableViewController {
+    
+    private var shouldShowDaysOut = true
+    private var animationFinished = true
+    private var selectedDay: DayView!
+    private var currentCalendar: Calendar?
+    
+    override func awakeFromNib() {
+        let timeZoneBias = 480 // (UTC+08:00)
+        currentCalendar = Calendar(identifier: .gregorian)
+        currentCalendar?.locale = Locale(identifier: "fr_FR")
+        if let timeZone = TimeZone(secondsFromGMT: -timeZoneBias * 60) {
+            currentCalendar?.timeZone = timeZone
+        }
+    }
+
     
     let realm = try! Realm()
     
@@ -18,9 +33,33 @@ class CategoryViewController: SwipeTableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        if let currentCalendar = currentCalendar {
+            
+            monthLabel.title = CVDate(date: Date(), calendar: currentCalendar).globalDescription
+            
+        }
         
+        // Menu delegate [Required]
+        self.menuView.menuViewDelegate = self
+
+        // Calendar delegate [Required]
+        self.calendarView.calendarDelegate = self
+        
+        // Do any additional setup after loading the view, typically from a nib.
+        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+        
+
+        viewDidLayoutSubviews()
         loadCategories()
 
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        menuView.commitMenuViewUpdate()
+        calendarView.commitCalendarViewUpdate()
     }
     
     
@@ -134,4 +173,80 @@ class CategoryViewController: SwipeTableViewController {
                     }
     }
     
+    
+    @IBOutlet weak var menuView: CVCalendarMenuView!
+    
+    @IBOutlet weak var calendarView: CVCalendarView!
+
+    @IBOutlet weak var monthLabel: UINavigationItem!
 }
+
+extension CategoryViewController: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
+
+    // MARK: - Life cycle
+    
+    func presentationMode() -> CalendarMode { return .weekView }
+    
+    func firstWeekday() -> Weekday { return .monday }
+    
+    // MARK: Optional methods
+    
+    func calendar() -> Calendar? { return currentCalendar }
+    
+    func shouldShowWeekdaysOut() -> Bool { return shouldShowDaysOut }
+    
+    //MARK: Update Month Title
+    
+    func presentedDateUpdated(_ date: CVDate) {
+        if monthLabel.title != date.globalDescription && self.animationFinished {
+            let updatedMonthLabel = UINavigationItem()
+            updatedMonthLabel.title = date.globalDescription
+            
+            UIView.animate(withDuration: 0.35, delay: 0, options: UIView.AnimationOptions.curveEaseIn, animations: {
+                self.animationFinished = false
+                //                self.monthLabel.transform = CGAffineTransform(translationX: 0, y: -offset)
+                //                self.monthLabel.transform = CGAffineTransform(scaleX: 1, y: 0.1)
+                //                self.monthLabel.alpha = 0
+                
+                //                updatedMonthLabel.alpha = 1
+                //                updatedMonthLabel.transform = CGAffineTransform.identity
+                
+            })
+            { _ in
+                
+                self.animationFinished = true
+                self.monthLabel.title = updatedMonthLabel.title
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
+//    func didShowNextMonthView(_ date: Date) {
+//        guard let currentCalendar = currentCalendar else { return }
+//
+//        let components = Manager.componentsForDate(date, calendar: currentCalendar) // from today
+//
+//        print("Showing Month: \(components.month!)")
+//    }
+//
+//    func didShowPreviousMonthView(_ date: Date) {
+//        guard let currentCalendar = currentCalendar else { return }
+//
+//        let components = Manager.componentsForDate(date, calendar: currentCalendar) // from today
+//
+//        print("Showing Month: \(components.month!)")
+//    }
+//
+//    func didShowNextWeekView(from startDayView: DayView, to endDayView: DayView) {
+//        print("Showing Week: from \(startDayView.date.day) to \(endDayView.date.day)")
+//    }
+//
+//    func didShowPreviousWeekView(from startDayView: DayView, to endDayView: DayView) {
+//        print("Showing Week: from \(startDayView.date.day) to \(endDayView.date.day)")
+//    }
+}
+
